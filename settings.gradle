@@ -1,0 +1,5 @@
+rootProject.name = 'pico-erp-work-day'
+include 'work-day-api'
+include 'work-day-impl'
+include 'work-day-test-cfg'
+
