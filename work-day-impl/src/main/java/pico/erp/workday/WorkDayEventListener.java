@@ -1,4 +1,4 @@
-package pico.erp.workday.core;
+package pico.erp.workday;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

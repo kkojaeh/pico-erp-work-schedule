@@ -10,7 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pico.erp.shared.TypeDefinitions;
-import pico.erp.workday.data.WorkDayCategoryId;
+import pico.erp.workday.category.data.WorkDayCategoryId;
 import pico.erp.workday.data.WorkDayId;
 import pico.erp.workday.data.WorkTimeData;
 

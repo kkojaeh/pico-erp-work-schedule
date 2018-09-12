@@ -3,8 +3,8 @@ package pico.erp.workday;
 import java.time.LocalDate;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import pico.erp.workday.data.WorkDayCategory;
-import pico.erp.workday.data.WorkDayCategoryId;
+import pico.erp.workday.category.data.WorkDayCategory;
+import pico.erp.workday.category.data.WorkDayCategoryId;
 import pico.erp.workday.data.WorkDayData;
 import pico.erp.workday.data.WorkDayId;
 

@@ -1,4 +1,4 @@
-package pico.erp.workday.impl;
+package pico.erp.workday.jpa;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -7,14 +7,12 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
+import pico.erp.workday.WorkDay;
 import pico.erp.workday.WorkDayExceptions;
-import pico.erp.workday.core.WorkDayCategoryRepository;
-import pico.erp.workday.data.WorkDayCategory;
-import pico.erp.workday.data.WorkDayCategoryId;
-import pico.erp.workday.domain.WorkDay;
-import pico.erp.workday.domain.WorkTime;
-import pico.erp.workday.impl.jpa.WorkDayEntity;
-import pico.erp.workday.impl.jpa.WorkTimeEmbeddable;
+import pico.erp.workday.WorkTime;
+import pico.erp.workday.category.WorkDayCategoryRepository;
+import pico.erp.workday.category.data.WorkDayCategory;
+import pico.erp.workday.category.data.WorkDayCategoryId;
 
 @Mapper
 public abstract class WorkDayJpaMapper {

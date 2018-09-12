@@ -1,4 +1,4 @@
-package pico.erp.workday.core;
+package pico.erp.workday;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -14,16 +14,11 @@ import org.springframework.validation.annotation.Validated;
 import pico.erp.audit.AuditService;
 import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
-import pico.erp.workday.WorkDayEvents;
-import pico.erp.workday.WorkDayExceptions;
-import pico.erp.workday.WorkDayProperties;
-import pico.erp.workday.WorkDayRequests;
-import pico.erp.workday.WorkDayService;
-import pico.erp.workday.data.WorkDayCategory;
-import pico.erp.workday.data.WorkDayCategoryId;
+import pico.erp.workday.category.WorkDayCategoryRepository;
+import pico.erp.workday.category.data.WorkDayCategory;
+import pico.erp.workday.category.data.WorkDayCategoryId;
 import pico.erp.workday.data.WorkDayData;
 import pico.erp.workday.data.WorkDayId;
-import pico.erp.workday.domain.WorkDay;
 
 @SuppressWarnings("Duplicates")
 @Service

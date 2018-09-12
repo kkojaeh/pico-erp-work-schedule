@@ -1,4 +1,4 @@
-package pico.erp.workday.impl;
+package pico.erp.workday.jpa;
 
 import static org.springframework.util.StringUtils.isEmpty;
 
@@ -19,12 +19,9 @@ import pico.erp.shared.Public;
 import pico.erp.shared.data.LabeledValuable;
 import pico.erp.shared.jpa.QueryDslJpaSupport;
 import pico.erp.workday.WorkDayQuery;
-import pico.erp.workday.core.WorkDayCategoryRepository;
+import pico.erp.workday.category.WorkDayCategoryRepository;
 import pico.erp.workday.data.WorkDayView;
 import pico.erp.workday.data.WorkTimeData;
-import pico.erp.workday.impl.jpa.QWorkDayEntity;
-import pico.erp.workday.impl.jpa.WorkDayEntity;
-import pico.erp.workday.impl.jpa.WorkTimeEmbeddable;
 
 @Service
 @Public

@@ -13,10 +13,10 @@ import pico.erp.shared.Public;
 import pico.erp.shared.SpringBootConfigs;
 import pico.erp.shared.data.Role;
 import pico.erp.shared.impl.ApplicationImpl;
-import pico.erp.workday.data.WorkDayCategory;
-import pico.erp.workday.data.WorkDayCategoryId;
+import pico.erp.workday.category.data.WorkDayCategory;
+import pico.erp.workday.category.data.WorkDayCategory.WorkDayCategoryImpl;
+import pico.erp.workday.category.data.WorkDayCategoryId;
 import pico.erp.workday.data.WorkTimeData;
-import pico.erp.workday.impl.WorkDayCategoryImpl;
 
 @Slf4j
 @SpringBootConfigs

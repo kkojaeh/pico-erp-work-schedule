@@ -8,7 +8,7 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.shared.IntegrationConfiguration
-import pico.erp.workday.data.WorkDayCategoryId
+import pico.erp.workday.category.data.WorkDayCategoryId
 import pico.erp.workday.data.WorkDayId
 import pico.erp.workday.data.WorkTimeData
 import spock.lang.Specification

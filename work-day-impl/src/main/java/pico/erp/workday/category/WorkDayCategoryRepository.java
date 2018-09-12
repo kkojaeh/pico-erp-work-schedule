@@ -1,10 +1,10 @@
-package pico.erp.workday.core;
+package pico.erp.workday.category;
 
 import java.util.Optional;
 import java.util.stream.Stream;
 import javax.validation.constraints.NotNull;
-import pico.erp.workday.data.WorkDayCategory;
-import pico.erp.workday.data.WorkDayCategoryId;
+import pico.erp.workday.category.data.WorkDayCategory;
+import pico.erp.workday.category.data.WorkDayCategoryId;
 
 public interface WorkDayCategoryRepository {
 

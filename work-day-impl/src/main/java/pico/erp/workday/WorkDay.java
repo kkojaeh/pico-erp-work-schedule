@@ -1,4 +1,4 @@
-package pico.erp.workday.domain;
+package pico.erp.workday;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,9 +14,7 @@ import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
 import pico.erp.audit.annotation.Audit;
-import pico.erp.workday.WorkDayEvents;
-import pico.erp.workday.WorkDayExceptions;
-import pico.erp.workday.data.WorkDayCategory;
+import pico.erp.workday.category.data.WorkDayCategory;
 import pico.erp.workday.data.WorkDayId;
 
 @Builder(toBuilder = true)

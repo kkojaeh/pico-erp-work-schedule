@@ -1,4 +1,4 @@
-package pico.erp.workday.impl.jpa;
+package pico.erp.workday.jpa;
 
 
 import java.io.Serializable;
@@ -36,7 +36,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;
-import pico.erp.workday.data.WorkDayCategoryId;
+import pico.erp.workday.category.data.WorkDayCategoryId;
 import pico.erp.workday.data.WorkDayId;
 
 @Entity(name = "WorkDay")

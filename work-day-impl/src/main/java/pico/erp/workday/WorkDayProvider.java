@@ -1,10 +1,9 @@
-package pico.erp.workday.core;
+package pico.erp.workday;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
 import javax.validation.constraints.NotNull;
-import pico.erp.workday.data.WorkDayCategory;
-import pico.erp.workday.domain.WorkDay;
+import pico.erp.workday.category.data.WorkDayCategory;
 
 public interface WorkDayProvider {
 

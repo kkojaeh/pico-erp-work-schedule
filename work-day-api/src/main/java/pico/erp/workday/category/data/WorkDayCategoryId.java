@@ -1,4 +1,4 @@
-package pico.erp.workday.data;
+package pico.erp.workday.category.data;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.io.Serializable;

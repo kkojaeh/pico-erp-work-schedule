@@ -1,4 +1,4 @@
-package pico.erp.workday.domain;
+package pico.erp.workday;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.Value;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
-import pico.erp.workday.data.WorkDayCategory;
+import pico.erp.workday.category.data.WorkDayCategory;
 import pico.erp.workday.data.WorkDayId;
 
 public interface WorkDayMessages {

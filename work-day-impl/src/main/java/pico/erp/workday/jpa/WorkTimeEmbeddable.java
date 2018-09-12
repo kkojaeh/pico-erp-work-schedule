@@ -1,4 +1,4 @@
-package pico.erp.workday.impl.jpa;
+package pico.erp.workday.jpa;
 
 import java.io.Serializable;
 import java.time.LocalTime;

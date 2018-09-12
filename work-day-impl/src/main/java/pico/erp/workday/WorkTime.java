@@ -1,4 +1,4 @@
-package pico.erp.workday.domain;
+package pico.erp.workday;
 
 import java.time.LocalTime;
 import lombok.AccessLevel;

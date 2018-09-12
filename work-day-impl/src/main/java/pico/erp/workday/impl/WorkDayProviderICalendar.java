@@ -17,12 +17,12 @@ import net.fortuna.ical4j.model.parameter.Value;
 import net.fortuna.ical4j.model.property.RRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pico.erp.workday.WorkDay;
+import pico.erp.workday.WorkDayMapper;
 import pico.erp.workday.WorkDayProperties;
-import pico.erp.workday.core.WorkDayMapper;
-import pico.erp.workday.core.WorkDayProvider;
-import pico.erp.workday.data.WorkDayCategory;
+import pico.erp.workday.WorkDayProvider;
+import pico.erp.workday.category.data.WorkDayCategory;
 import pico.erp.workday.data.WorkDayId;
-import pico.erp.workday.domain.WorkDay;
 
 @Component
 public class WorkDayProviderICalendar implements WorkDayProvider {

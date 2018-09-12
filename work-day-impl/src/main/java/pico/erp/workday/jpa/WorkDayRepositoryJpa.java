@@ -1,4 +1,4 @@
-package pico.erp.workday.impl;
+package pico.erp.workday.jpa;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -10,11 +10,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pico.erp.workday.core.WorkDayRepository;
-import pico.erp.workday.data.WorkDayCategoryId;
+import pico.erp.workday.WorkDay;
+import pico.erp.workday.WorkDayRepository;
+import pico.erp.workday.category.data.WorkDayCategoryId;
 import pico.erp.workday.data.WorkDayId;
-import pico.erp.workday.domain.WorkDay;
-import pico.erp.workday.impl.jpa.WorkDayEntity;
 
 @Repository
 interface WorkDayEntityRepository extends CrudRepository<WorkDayEntity, WorkDayId> {
