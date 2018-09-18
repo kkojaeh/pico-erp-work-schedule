@@ -63,6 +63,8 @@ public class WorkDayQueryJpa implements WorkDayQuery {
 
     val builder = new BooleanBuilder();
 
+    builder.and(workDay.categoryId.eq(filter.getCategoryId()));
+
     if (!isEmpty(filter.getBegin())) {
       builder.and(workDay.date.goe(filter.getBegin()));
     }
