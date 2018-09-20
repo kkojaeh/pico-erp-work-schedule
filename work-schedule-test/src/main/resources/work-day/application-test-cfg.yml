@@ -1,0 +1,26 @@
+data:
+  work-schedules:
+  - id: global-2018-08-11
+    date: 2018-08-11
+    category-id: global
+    times:
+    - begin: "09:00"
+      end: "12:00"
+    - begin: "13:00"
+      end: "18:00"
+  - id: global-2018-08-12
+    date: 2018-08-12
+    category-id: global
+    times:
+    - begin: "09:00"
+      end: "12:00"
+    - begin: "13:00"
+      end: "18:00"
+  - id: global-2018-08-13
+    date: 2018-08-13
+    category-id: global
+    times:
+    - begin: "09:00"
+      end: "12:00"
+    - begin: "13:00"
+      end: "18:00"

@@ -4,11 +4,11 @@ buildscript {
 
 ext {
   linkHomepage = 'https://kkojaeh.github.io/pico-erp-server/#/'
-  linkCi = 'https://travis-ci.org/kkojaeh/pico-erp-project'
-  linkIssue = 'https://github.com/kkojaeh/pico-erp-project/issues'
-  linkScmUrl = 'https://github.com/kkojaeh/pico-erp-project'
-  linkScmConnection = 'scm:git:git://github.com/kkojaeh/pico-erp-project.git'
-  linkScmDevConnection = 'scm:git:ssh://git@github.com/kkojaeh/pico-erp-project.git'
+  linkCi = 'https://travis-ci.org/kkojaeh/pico-erp-work-schedule'
+  linkIssue = 'https://github.com/kkojaeh/pico-erp-work-schedule/issues'
+  linkScmUrl = 'https://github.com/kkojaeh/pico-erp-work-schedule'
+  linkScmConnection = 'scm:git:git://github.com/kkojaeh/pico-erp-work-schedule.git'
+  linkScmDevConnection = 'scm:git:ssh://git@github.com/kkojaeh/pico-erp-work-schedule.git'
 }
 
 apply plugin: 'java'
