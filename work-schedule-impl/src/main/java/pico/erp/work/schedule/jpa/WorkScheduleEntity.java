@@ -77,7 +77,7 @@ public class WorkScheduleEntity implements Serializable {
   @Builder.Default
   @ElementCollection(fetch = FetchType.LAZY)
   @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-  @CollectionTable(name = "WOD_WORK_SCHEDULE_TIME", joinColumns = @JoinColumn(name = "WORK_SCHEDULE_ID"))
+  @CollectionTable(name = "WKS_WORK_SCHEDULE_TIME", joinColumns = @JoinColumn(name = "WORK_SCHEDULE_ID"))
   @OrderColumn
   @OrderBy("begin")
   List<WorkScheduleTimeEmbeddable> times = new LinkedList<>();

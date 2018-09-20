@@ -14,16 +14,16 @@ create table wks_work_schedule (
 ) engine=InnoDB;
 
 create table wks_work_schedule_time (
-	work_day_id varchar(255) not null,
+	work_schedule_id varchar(255) not null,
 	begin time,
 	end time,
 	times_order integer not null,
-	primary key (work_day_id,times_order)
+	primary key (work_schedule_id,times_order)
 ) engine=InnoDB;
 
-create index WOD_WORK_SCHEDULE_CATEGORY_ID_DATE_IDX
-	on wod_work_day (category_id,work_date);
+create index WKS_WORK_SCHEDULE_CATEGORY_ID_DATE_IDX
+	on wks_work_schedule (category_id,work_date);
 
 alter table wks_work_schedule_time
-	add constraint FKhrlr707swbmdwsdna7eyvnt5f foreign key (work_day_id)
+	add constraint FKm8pbg9ekv646oovxncv0vu4e5 foreign key (work_schedule_id)
 	references wks_work_schedule (id);
