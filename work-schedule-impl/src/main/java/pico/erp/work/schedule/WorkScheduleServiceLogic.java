@@ -1,7 +1,7 @@
 package pico.erp.work.schedule;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Comparator;
@@ -84,46 +84,8 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
     return workScheduleRepository.exists(id);
   }
 
-  @Override
-  public LocalDateTime calculateEnd(CalculateEndRequest request) {
-    val begin = request.getBegin();
-    val workSchedule = workScheduleRepository
-      .findBy(request.getCategoryId(), request.getBegin().toLocalDate())
-      .orElseThrow(WorkScheduleExceptions.NotFoundException::new);
-    if (!workSchedule.isScheduled(begin)) {
-      throw new WorkScheduleExceptions.IllegalTimeException();
-    }
-    val schedules = workScheduleRepository
-      .findAllAfter(request.getCategoryId(), request.getBegin().toLocalDate())
-      .sorted(Comparator.comparing(WorkSchedule::getDate))
-      .collect(Collectors.toList());
-
-    long remainedMinutes = request.getDurationMinutes();
-    LocalDateTime calculated = null;
-
-    for (val schedule : schedules) {
-      for (val time : schedule.getTimes()) {
-        val scheduledBegin = schedule.getDate().atTime(time.getBegin());
-        val scheduledEnd = schedule.getDate().atTime(time.getEnd());
-        if (scheduledEnd.isBefore(begin)) {
-          continue;
-        }
-        long minutes = ChronoUnit.MINUTES.between(scheduledBegin, scheduledEnd);
-        if (scheduledBegin.isBefore(begin)) {
-          minutes -= ChronoUnit.MINUTES.between(scheduledBegin, begin);
-        }
-        if (remainedMinutes > minutes) {
-          remainedMinutes -= minutes;
-        } else {
-          calculated = scheduledBegin.plusMinutes(remainedMinutes);
-          break;
-        }
-      }
-      if (calculated != null) {
-        break;
-      }
-    }
-    return calculated;
+  public static void main(String... args) {
+    System.out.println(OffsetDateTime.now());
   }
 
   @Override
@@ -192,6 +154,49 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
         );
       });
 
+  }
+
+  @Override
+  public OffsetDateTime calculateEnd(CalculateEndRequest request) {
+    val category = get(request.getCategoryId());
+    val begin = request.getBegin();
+    val workSchedule = workScheduleRepository
+      .findBy(request.getCategoryId(), request.getBegin().toLocalDate())
+      .orElseThrow(WorkScheduleExceptions.NotFoundException::new);
+    if (!workSchedule.isScheduled(begin)) {
+      throw new WorkScheduleExceptions.IllegalTimeException();
+    }
+    val schedules = workScheduleRepository
+      .findAllAfter(request.getCategoryId(), request.getBegin().toLocalDate())
+      .sorted(Comparator.comparing(WorkSchedule::getDate))
+      .collect(Collectors.toList());
+
+    long remainedMinutes = request.getDurationMinutes();
+    OffsetDateTime calculated = null;
+
+    for (val schedule : schedules) {
+      for (val time : schedule.getTimes()) {
+        val scheduledBegin = schedule.atOffset(time.getBegin());
+        val scheduledEnd = schedule.atOffset(time.getEnd());
+        if (scheduledEnd.isBefore(begin)) {
+          continue;
+        }
+        long minutes = ChronoUnit.MINUTES.between(scheduledBegin, scheduledEnd);
+        if (scheduledBegin.isBefore(begin)) {
+          minutes -= ChronoUnit.MINUTES.between(scheduledBegin, begin);
+        }
+        if (remainedMinutes > minutes) {
+          remainedMinutes -= minutes;
+        } else {
+          calculated = scheduledBegin.plusMinutes(remainedMinutes);
+          break;
+        }
+      }
+      if (calculated != null) {
+        break;
+      }
+    }
+    return calculated;
   }
 
 }
