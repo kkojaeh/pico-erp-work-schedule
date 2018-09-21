@@ -31,4 +31,10 @@ public interface WorkScheduleExceptions {
     private static final long serialVersionUID = 1L;
   }
 
+  @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE, reason = "work-schedule.illegal.time.exception")
+  class IllegalTimeException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+  }
+
 }

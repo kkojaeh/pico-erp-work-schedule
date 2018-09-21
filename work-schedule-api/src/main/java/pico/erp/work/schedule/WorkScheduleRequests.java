@@ -1,8 +1,10 @@
 package pico.erp.work.schedule;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -83,5 +85,24 @@ public interface WorkScheduleRequests {
     @Valid
     @NotNull
     WorkScheduleId id;
+  }
+
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @Builder
+  class CalculateEndRequest {
+
+    @Valid
+    @NotNull
+    WorkScheduleCategoryId categoryId;
+
+    @NotNull
+    LocalDateTime begin;
+
+    @Min(0)
+    long durationMinutes;
+
+
   }
 }

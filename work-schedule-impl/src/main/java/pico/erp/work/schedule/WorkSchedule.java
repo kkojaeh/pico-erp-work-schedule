@@ -2,6 +2,8 @@ package pico.erp.work.schedule;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,6 +42,7 @@ public class WorkSchedule implements Serializable {
 
   List<WorkScheduleTime> times;
 
+
   public WorkSchedule() {
     this.times = new LinkedList<>();
   }
@@ -51,6 +54,7 @@ public class WorkSchedule implements Serializable {
     name = request.getName();
     holiday = request.isHoliday();
     times = request.getTimes();
+    validateTimes();
     return new WorkScheduleMessages.CreateResponse(
       Arrays.asList(new WorkScheduleEvents.CreatedEvent(this.id)));
   }
@@ -64,13 +68,43 @@ public class WorkSchedule implements Serializable {
     name = request.getName();
     holiday = request.isHoliday();
     times = request.getTimes();
+    validateTimes();
     return new WorkScheduleMessages.UpdateResponse(
       Arrays.asList(new WorkScheduleEvents.UpdatedEvent(this.id)));
+  }
+
+  public LocalTime getBegin() {
+    return times.stream()
+      .map(time -> time.getBegin())
+      .reduce((min, begin) -> begin.isBefore(min) ? begin : min)
+      .orElse(null);
   }
 
   public WorkScheduleMessages.DeleteResponse apply(WorkScheduleMessages.DeleteRequest request) {
     return new WorkScheduleMessages.DeleteResponse(
       Arrays.asList(new WorkScheduleEvents.DeletedEvent(this.id)));
+  }
+
+  public boolean isScheduled(LocalDateTime dateTime) {
+    return times.stream().filter(time -> {
+      val begin = date.atTime(time.getBegin());
+      val end = date.atTime(time.getEnd());
+      if (dateTime.isBefore(begin)) {
+        return false;
+      }
+      if (dateTime.isBefore(end)) {
+        return true;
+      }
+      return false;
+    }).count() > 0;
+  }
+
+  private void validateTimes() {
+    val hasIllegalTimes = times.stream().filter(time -> time.getBegin().isAfter(time.getEnd()))
+      .count() > 0;
+    if (hasIllegalTimes) {
+      throw new WorkScheduleExceptions.IllegalTimeException();
+    }
   }
 
 

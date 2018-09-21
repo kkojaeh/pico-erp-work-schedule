@@ -3,6 +3,7 @@ package pico.erp.work.schedule.jpa;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.stream.Stream;
+import javax.validation.constraints.NotNull;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -24,7 +25,12 @@ interface WorkScheduleEntityRepository extends CrudRepository<WorkScheduleEntity
     @Param("date") LocalDate date
   );
 
-  @Query("SELECT ws FROM WorkSchedule ws WHERE ws.categoryId = :categoryId AND ws.date >= :begin AND ws.date <= :end")
+  @Query("SELECT ws FROM WorkSchedule ws WHERE ws.categoryId = :categoryId AND ws.date >= :other ORDER BY ws.date ASC")
+  Stream<WorkScheduleEntity> findAllAfter(
+    @Param("categoryId") WorkScheduleCategoryId categoryId,
+    @Param("other") LocalDate other);
+
+  @Query("SELECT ws FROM WorkSchedule ws WHERE ws.categoryId = :categoryId AND ws.date >= :begin AND ws.date <= :end ORDER BY ws.date ASC")
   Stream<WorkScheduleEntity> findAllBetween(
     @Param("categoryId") WorkScheduleCategoryId categoryId,
     @Param("begin") LocalDate begin,
@@ -75,6 +81,13 @@ public class WorkScheduleRepositoryJpa implements WorkScheduleRepository {
   public Stream<WorkSchedule> findAllBetween(WorkScheduleCategoryId categoryId, LocalDate begin,
     LocalDate end) {
     return repository.findAllBetween(categoryId, begin, end)
+      .map(mapper::map);
+  }
+
+  @Override
+  public Stream<WorkSchedule> findAllAfter(@NotNull WorkScheduleCategoryId categoryId,
+    @NotNull LocalDate base) {
+    return repository.findAllAfter(categoryId, base)
       .map(mapper::map);
   }
 

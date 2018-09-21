@@ -18,11 +18,9 @@ import net.fortuna.ical4j.model.property.RRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pico.erp.work.schedule.Mapper;
-import pico.erp.work.schedule.WorkSchedule;
 import pico.erp.work.schedule.WorkScheduleProperties;
 import pico.erp.work.schedule.WorkScheduleProvider;
 import pico.erp.work.schedule.category.data.WorkScheduleCategory;
-import pico.erp.work.schedule.data.WorkScheduleId;
 
 @Component
 public class WorkScheduleProviderICalendar implements WorkScheduleProvider {
@@ -35,7 +33,7 @@ public class WorkScheduleProviderICalendar implements WorkScheduleProvider {
 
   @SneakyThrows
   @Override
-  public Stream<WorkSchedule> findAllBetween(WorkScheduleCategory category, LocalDate begin,
+  public Stream<WorkScheduleInfo> findAllBetween(WorkScheduleCategory category, LocalDate begin,
     LocalDate end) {
     val policy = workScheduleProperties.getICalendarProvidePolicy();
     val location = policy.getLocation();
@@ -50,7 +48,7 @@ public class WorkScheduleProviderICalendar implements WorkScheduleProvider {
       .flatMap(event -> this.map(category, event, begin, end));
   }
 
-  private Stream<WorkSchedule> map(WorkScheduleCategory category, VEvent event, LocalDate begin,
+  private Stream<WorkScheduleInfo> map(WorkScheduleCategory category, VEvent event, LocalDate begin,
     LocalDate end) {
     val zoneId = ZoneId.systemDefault();
     val endDate = Date.from(end.atStartOfDay().atZone(zoneId).toInstant());
@@ -80,8 +78,7 @@ public class WorkScheduleProviderICalendar implements WorkScheduleProvider {
       .filter(date -> !date.isBefore(begin) && !date.isAfter(end))
       .map(date -> {
         val holiday = holidayEvent || workScheduleProperties.isHoliday(date.getDayOfWeek());
-        return WorkSchedule.builder()
-          .id(WorkScheduleId.generate())
+        return WorkScheduleInfo.builder()
           .date(date)
           .category(category)
           .times(

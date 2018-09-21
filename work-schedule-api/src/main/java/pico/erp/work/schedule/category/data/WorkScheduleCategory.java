@@ -1,5 +1,6 @@
 package pico.erp.work.schedule.category.data;
 
+import java.time.ZoneId;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,8 @@ public interface WorkScheduleCategory {
 
   List<WorkScheduleTimeData> getTimes();
 
+  ZoneId getZoneId();
+
   @Getter
   @AllArgsConstructor
   class WorkScheduleCategoryImpl implements WorkScheduleCategory {
@@ -20,6 +23,8 @@ public interface WorkScheduleCategory {
     WorkScheduleCategoryId id;
 
     String name;
+
+    ZoneId zoneId;
 
     List<WorkScheduleTimeData> times;
 

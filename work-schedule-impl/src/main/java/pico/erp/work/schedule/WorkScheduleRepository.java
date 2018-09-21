@@ -22,11 +22,15 @@ public interface WorkScheduleRepository {
   Stream<WorkSchedule> findAllBetween(
     @NotNull WorkScheduleCategoryId categoryId, @NotNull LocalDate begin, @NotNull LocalDate end);
 
+  Stream<WorkSchedule> findAllAfter(
+    @NotNull WorkScheduleCategoryId categoryId, @NotNull LocalDate other);
+
   Optional<WorkSchedule> findBy(@NotNull WorkScheduleId id);
 
   Optional<WorkSchedule> findBy(@NotNull WorkScheduleCategoryId categoryId,
     @NotNull LocalDate date);
 
   void update(@NotNull WorkSchedule workSchedule);
+
 
 }

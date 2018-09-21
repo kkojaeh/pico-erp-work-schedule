@@ -4,13 +4,15 @@ import java.util.Optional;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
+import pico.erp.work.schedule.WorkScheduleProvider.WorkScheduleInfo;
 import pico.erp.work.schedule.category.WorkScheduleCategoryRepository;
 import pico.erp.work.schedule.category.data.WorkScheduleCategory;
 import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
 import pico.erp.work.schedule.data.WorkScheduleData;
+import pico.erp.work.schedule.data.WorkScheduleId;
 import pico.erp.work.schedule.data.WorkScheduleTimeData;
 
-@org.mapstruct.Mapper
+@org.mapstruct.Mapper(imports = WorkScheduleId.class)
 public abstract class Mapper {
 
   @Autowired
@@ -43,6 +45,12 @@ public abstract class Mapper {
   })
   public abstract WorkScheduleMessages.CreateRequest map(
     WorkScheduleRequests.CreateRequest request);
+
+  @Mappings({
+    @Mapping(target = "id", expression = "java(WorkScheduleId.generate())")
+  })
+  public abstract WorkScheduleMessages.CreateRequest map(
+    WorkScheduleInfo info);
 
   public abstract WorkScheduleMessages.UpdateRequest map(
     WorkScheduleRequests.UpdateRequest request);
