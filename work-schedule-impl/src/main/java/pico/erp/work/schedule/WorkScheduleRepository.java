@@ -5,8 +5,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 import javax.validation.constraints.NotNull;
 import org.springframework.stereotype.Repository;
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
-import pico.erp.work.schedule.data.WorkScheduleId;
+import pico.erp.work.schedule.category.WorkScheduleCategoryId;
 
 @Repository
 public interface WorkScheduleRepository {

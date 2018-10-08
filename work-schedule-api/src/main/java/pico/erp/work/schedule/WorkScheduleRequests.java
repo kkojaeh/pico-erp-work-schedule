@@ -12,9 +12,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pico.erp.shared.TypeDefinitions;
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
-import pico.erp.work.schedule.data.WorkScheduleId;
-import pico.erp.work.schedule.data.WorkScheduleTimeData;
+import pico.erp.work.schedule.category.WorkScheduleCategoryId;
+import pico.erp.work.schedule.time.WorkScheduleTimeData;
 
 public interface WorkScheduleRequests {
 

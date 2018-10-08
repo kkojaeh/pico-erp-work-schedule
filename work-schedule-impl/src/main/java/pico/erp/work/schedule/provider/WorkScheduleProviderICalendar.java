@@ -1,4 +1,4 @@
-package pico.erp.work.schedule.impl;
+package pico.erp.work.schedule.provider;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -17,10 +17,9 @@ import net.fortuna.ical4j.model.parameter.Value;
 import net.fortuna.ical4j.model.property.RRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pico.erp.work.schedule.Mapper;
 import pico.erp.work.schedule.WorkScheduleProperties;
-import pico.erp.work.schedule.WorkScheduleProvider;
-import pico.erp.work.schedule.category.data.WorkScheduleCategory;
+import pico.erp.work.schedule.category.WorkScheduleCategory;
+import pico.erp.work.schedule.time.WorkScheduleTimeMapper;
 
 @Component
 public class WorkScheduleProviderICalendar implements WorkScheduleProvider {
@@ -29,7 +28,7 @@ public class WorkScheduleProviderICalendar implements WorkScheduleProvider {
   WorkScheduleProperties workScheduleProperties;
 
   @Autowired
-  private Mapper mapper;
+  private WorkScheduleTimeMapper timeMapper;
 
   @SneakyThrows
   @Override
@@ -83,7 +82,7 @@ public class WorkScheduleProviderICalendar implements WorkScheduleProvider {
           .category(category)
           .times(
             holiday ? Collections.emptyList()
-              : category.getTimes().stream().map(mapper::map).collect(Collectors.toList())
+              : category.getTimes().stream().map(timeMapper::map).collect(Collectors.toList())
           )
           .name(summary)
           .holiday(holiday)

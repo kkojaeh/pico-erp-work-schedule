@@ -4,10 +4,8 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import pico.erp.work.schedule.category.data.WorkScheduleCategory;
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
-import pico.erp.work.schedule.data.WorkScheduleData;
-import pico.erp.work.schedule.data.WorkScheduleId;
+import pico.erp.work.schedule.category.WorkScheduleCategory;
+import pico.erp.work.schedule.category.WorkScheduleCategoryId;
 
 public interface WorkScheduleService {
 

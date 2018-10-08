@@ -1,4 +1,4 @@
-package pico.erp.work.schedule;
+package pico.erp.work.schedule.time;
 
 import java.time.LocalTime;
 import lombok.AccessLevel;

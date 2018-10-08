@@ -1,4 +1,4 @@
-package pico.erp.work.schedule;
+package pico.erp.work.schedule.provider;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -6,7 +6,8 @@ import java.util.stream.Stream;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
-import pico.erp.work.schedule.category.data.WorkScheduleCategory;
+import pico.erp.work.schedule.category.WorkScheduleCategory;
+import pico.erp.work.schedule.time.WorkScheduleTime;
 
 public interface WorkScheduleProvider {
 

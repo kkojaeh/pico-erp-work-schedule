@@ -1,4 +1,4 @@
-package pico.erp.work.schedule.jpa;
+package pico.erp.work.schedule.time;
 
 import java.io.Serializable;
 import java.time.LocalTime;

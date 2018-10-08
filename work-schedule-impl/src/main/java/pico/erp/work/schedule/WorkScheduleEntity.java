@@ -1,4 +1,4 @@
-package pico.erp.work.schedule.jpa;
+package pico.erp.work.schedule;
 
 
 import java.io.Serializable;
@@ -36,8 +36,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
-import pico.erp.work.schedule.data.WorkScheduleId;
+import pico.erp.work.schedule.category.WorkScheduleCategoryId;
+import pico.erp.work.schedule.time.WorkScheduleTimeEmbeddable;
 
 @Entity(name = "WorkSchedule")
 @Table(name = "WKS_WORK_SCHEDULE", indexes = {

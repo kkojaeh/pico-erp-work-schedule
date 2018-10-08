@@ -11,8 +11,8 @@ import lombok.Value;
 import org.hibernate.validator.constraints.ScriptAssert;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
-import pico.erp.work.schedule.category.data.WorkScheduleCategory;
-import pico.erp.work.schedule.data.WorkScheduleId;
+import pico.erp.work.schedule.category.WorkScheduleCategory;
+import pico.erp.work.schedule.time.WorkScheduleTime;
 
 public interface WorkScheduleMessages {
 

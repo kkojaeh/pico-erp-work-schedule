@@ -8,8 +8,8 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.shared.IntegrationConfiguration
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId
-import pico.erp.work.schedule.data.WorkScheduleId
+import pico.erp.work.schedule.category.WorkScheduleCategoryId
+import pico.erp.work.schedule.time.WorkScheduleTimeData
 import spock.lang.Specification
 
 import java.time.LocalDate
@@ -34,7 +34,7 @@ class WorkScheduleQuerySpec extends Specification {
       date: LocalDate.parse("2018-08-14"),
       categoryId: WorkScheduleCategoryId.from("global"),
       holiday: false,
-      times: new LinkedList<pico.erp.work.schedule.data.WorkScheduleTimeData>()
+      times: new LinkedList<WorkScheduleTimeData>()
     ))
     workScheduleService.create(new WorkScheduleRequests.CreateRequest(
       id: WorkScheduleId.from("global-2018-08-15"),
@@ -42,13 +42,13 @@ class WorkScheduleQuerySpec extends Specification {
       categoryId: WorkScheduleCategoryId.from("global"),
       name: "광복절",
       holiday: true,
-      times: new LinkedList<pico.erp.work.schedule.data.WorkScheduleTimeData>()
+      times: new LinkedList<WorkScheduleTimeData>()
     ))
   }
 
   def "아이디로 존재하는 작업일 확인"() {
     when:
-    def result = workScheduleQuery.retrieve(new pico.erp.work.schedule.data.WorkScheduleView.Filter(
+    def result = workScheduleQuery.retrieve(new WorkScheduleView.Filter(
       categoryId: WorkScheduleCategoryId.from("global"),
       begin: LocalDate.parse("2018-08-15"),
       end: LocalDate.parse("2018-08-15")

@@ -1,4 +1,4 @@
-package pico.erp.work.schedule.data;
+package pico.erp.work.schedule;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,7 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
+import pico.erp.work.schedule.category.WorkScheduleCategoryId;
+import pico.erp.work.schedule.time.WorkScheduleTimeData;
 
 @AllArgsConstructor
 @NoArgsConstructor

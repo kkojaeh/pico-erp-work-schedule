@@ -8,9 +8,8 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.shared.IntegrationConfiguration
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId
-import pico.erp.work.schedule.data.WorkScheduleId
-import pico.erp.work.schedule.data.WorkScheduleTimeData
+import pico.erp.work.schedule.category.WorkScheduleCategoryId
+import pico.erp.work.schedule.time.WorkScheduleTimeData
 import spock.lang.Specification
 
 import java.time.LocalDate

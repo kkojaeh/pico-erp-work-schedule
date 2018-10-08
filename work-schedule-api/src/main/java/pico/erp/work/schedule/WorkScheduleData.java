@@ -1,4 +1,4 @@
-package pico.erp.work.schedule.data;
+package pico.erp.work.schedule;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,7 +8,8 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldDefaults;
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
+import pico.erp.work.schedule.category.WorkScheduleCategoryId;
+import pico.erp.work.schedule.time.WorkScheduleTimeData;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)

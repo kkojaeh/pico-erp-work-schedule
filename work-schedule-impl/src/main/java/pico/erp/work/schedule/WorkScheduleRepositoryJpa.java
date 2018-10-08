@@ -1,4 +1,4 @@
-package pico.erp.work.schedule.jpa;
+package pico.erp.work.schedule;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -11,10 +11,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pico.erp.work.schedule.WorkSchedule;
-import pico.erp.work.schedule.WorkScheduleRepository;
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
-import pico.erp.work.schedule.data.WorkScheduleId;
+import pico.erp.work.schedule.category.WorkScheduleCategoryId;
 
 @Repository
 interface WorkScheduleEntityRepository extends CrudRepository<WorkScheduleEntity, WorkScheduleId> {
@@ -52,14 +49,14 @@ public class WorkScheduleRepositoryJpa implements WorkScheduleRepository {
   private WorkScheduleEntityRepository repository;
 
   @Autowired
-  private JpaMapper mapper;
+  private WorkScheduleMapper mapper;
 
 
   @Override
   public WorkSchedule create(WorkSchedule workSchedule) {
-    val entity = mapper.map(workSchedule);
+    val entity = mapper.entity(workSchedule);
     val created = repository.save(entity);
-    return mapper.map(created);
+    return mapper.domain(created);
   }
 
   @Override
@@ -78,35 +75,35 @@ public class WorkScheduleRepositoryJpa implements WorkScheduleRepository {
   }
 
   @Override
-  public Stream<WorkSchedule> findAllBetween(WorkScheduleCategoryId categoryId, LocalDate begin,
-    LocalDate end) {
-    return repository.findAllBetween(categoryId, begin, end)
-      .map(mapper::map);
-  }
-
-  @Override
   public Stream<WorkSchedule> findAllAfter(@NotNull WorkScheduleCategoryId categoryId,
     @NotNull LocalDate base) {
     return repository.findAllAfter(categoryId, base)
-      .map(mapper::map);
+      .map(mapper::domain);
+  }
+
+  @Override
+  public Stream<WorkSchedule> findAllBetween(WorkScheduleCategoryId categoryId, LocalDate begin,
+    LocalDate end) {
+    return repository.findAllBetween(categoryId, begin, end)
+      .map(mapper::domain);
   }
 
   @Override
   public Optional<WorkSchedule> findBy(WorkScheduleId id) {
     return Optional.ofNullable(repository.findOne(id))
-      .map(mapper::map);
+      .map(mapper::domain);
   }
 
   @Override
   public Optional<WorkSchedule> findBy(WorkScheduleCategoryId categoryId, LocalDate date) {
     return repository.findBy(categoryId, date)
-      .map(mapper::map);
+      .map(mapper::domain);
   }
 
   @Override
   public void update(WorkSchedule workSchedule) {
     val entity = repository.findOne(workSchedule.getId());
-    mapper.pass(mapper.map(workSchedule), entity);
+    mapper.pass(mapper.entity(workSchedule), entity);
     repository.save(entity);
   }
 }

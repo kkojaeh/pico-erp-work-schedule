@@ -1,10 +1,10 @@
-package pico.erp.work.schedule.category.data;
+package pico.erp.work.schedule.category;
 
 import java.time.ZoneId;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import pico.erp.work.schedule.data.WorkScheduleTimeData;
+import pico.erp.work.schedule.time.WorkScheduleTimeData;
 
 public interface WorkScheduleCategory {
 

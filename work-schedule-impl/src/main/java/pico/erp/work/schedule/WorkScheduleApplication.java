@@ -8,16 +8,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
-import pico.erp.audit.data.AuditConfiguration;
+import pico.erp.audit.AuditConfiguration;
 import pico.erp.shared.ApplicationStarter;
 import pico.erp.shared.Public;
 import pico.erp.shared.SpringBootConfigs;
 import pico.erp.shared.data.Role;
 import pico.erp.shared.impl.ApplicationImpl;
-import pico.erp.work.schedule.category.data.WorkScheduleCategory;
-import pico.erp.work.schedule.category.data.WorkScheduleCategory.WorkScheduleCategoryImpl;
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
-import pico.erp.work.schedule.data.WorkScheduleTimeData;
+import pico.erp.work.schedule.category.WorkScheduleCategory;
+import pico.erp.work.schedule.category.WorkScheduleCategory.WorkScheduleCategoryImpl;
+import pico.erp.work.schedule.category.WorkScheduleCategoryId;
+import pico.erp.work.schedule.time.WorkScheduleTimeData;
 
 @Slf4j
 @SpringBootConfigs

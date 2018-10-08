@@ -6,8 +6,6 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
-import pico.erp.work.schedule.category.data.WorkScheduleCategory;
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
 
 @Repository
 public class WorkScheduleCategoryRepositoryImpl implements WorkScheduleCategoryRepository {

@@ -1,4 +1,4 @@
-package pico.erp.work.schedule.jpa;
+package pico.erp.work.schedule;
 
 import static org.springframework.util.StringUtils.isEmpty;
 
@@ -18,10 +18,9 @@ import pico.erp.shared.ExtendedLabeledValue;
 import pico.erp.shared.Public;
 import pico.erp.shared.data.LabeledValuable;
 import pico.erp.shared.jpa.QueryDslJpaSupport;
-import pico.erp.work.schedule.WorkScheduleQuery;
 import pico.erp.work.schedule.category.WorkScheduleCategoryRepository;
-import pico.erp.work.schedule.data.WorkScheduleTimeData;
-import pico.erp.work.schedule.data.WorkScheduleView;
+import pico.erp.work.schedule.time.WorkScheduleTimeData;
+import pico.erp.work.schedule.time.WorkScheduleTimeEmbeddable;
 
 @Service
 @Public

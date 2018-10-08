@@ -1,4 +1,4 @@
-package pico.erp.work.schedule.category.data;
+package pico.erp.work.schedule.category;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.io.Serializable;

@@ -16,13 +16,12 @@ import org.springframework.validation.annotation.Validated;
 import pico.erp.audit.AuditService;
 import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
-import pico.erp.work.schedule.WorkScheduleProvider.WorkScheduleInfo;
 import pico.erp.work.schedule.WorkScheduleRequests.CalculateEndRequest;
+import pico.erp.work.schedule.category.WorkScheduleCategory;
+import pico.erp.work.schedule.category.WorkScheduleCategoryId;
 import pico.erp.work.schedule.category.WorkScheduleCategoryRepository;
-import pico.erp.work.schedule.category.data.WorkScheduleCategory;
-import pico.erp.work.schedule.category.data.WorkScheduleCategoryId;
-import pico.erp.work.schedule.data.WorkScheduleData;
-import pico.erp.work.schedule.data.WorkScheduleId;
+import pico.erp.work.schedule.provider.WorkScheduleProvider;
+import pico.erp.work.schedule.provider.WorkScheduleProvider.WorkScheduleInfo;
 
 @SuppressWarnings("Duplicates")
 @Service
@@ -38,7 +37,7 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
   private EventPublisher eventPublisher;
 
   @Autowired
-  private Mapper mapper;
+  private WorkScheduleMapper mapper;
 
   @Lazy
   @Autowired
