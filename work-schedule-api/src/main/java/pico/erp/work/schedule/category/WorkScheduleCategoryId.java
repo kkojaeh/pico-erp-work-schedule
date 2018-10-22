@@ -1,5 +1,6 @@
 package pico.erp.work.schedule.category;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.io.Serializable;
 import javax.persistence.Embeddable;
@@ -29,6 +30,7 @@ public class WorkScheduleCategoryId implements Serializable {
   @NotNull
   private String value;
 
+  @JsonCreator
   public static WorkScheduleCategoryId from(@NonNull String value) {
     return new WorkScheduleCategoryId(value);
   }
