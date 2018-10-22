@@ -57,12 +57,12 @@ public class WorkScheduleEntity implements Serializable {
 
   @EmbeddedId
   @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "ID"))
+    @AttributeOverride(name = "value", column = @Column(name = "ID", length = TypeDefinitions.UUID_BINARY_LENGTH))
   })
   WorkScheduleId id;
 
   @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "CATEGORY_ID"))
+    @AttributeOverride(name = "value", column = @Column(name = "CATEGORY_ID", length = TypeDefinitions.ID_LENGTH))
   })
   WorkScheduleCategoryId categoryId;
 
