@@ -41,7 +41,7 @@ import pico.erp.work.schedule.time.WorkScheduleTimeEmbeddable;
 
 @Entity(name = "WorkSchedule")
 @Table(name = "WKS_WORK_SCHEDULE", indexes = {
-  @Index(name = "WKS_WORK_SCHEDULE_CATEGORY_ID_DATE_IDX", columnList = "CATEGORY_ID, WORK_DATE")
+  @Index(columnList = "CATEGORY_ID, WORK_DATE")
 })
 @Data
 @EqualsAndHashCode(of = "id")

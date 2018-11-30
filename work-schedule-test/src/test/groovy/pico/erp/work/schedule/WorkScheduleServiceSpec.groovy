@@ -27,18 +27,25 @@ class WorkScheduleServiceSpec extends Specification {
   @Autowired
   WorkScheduleService workScheduleService
 
+
+  def id = WorkScheduleId.from("global-2018-08-14")
+
+  def unknownId = WorkScheduleId.from("unknown")
+
+  def categoryId = WorkScheduleCategoryId.from("global")
+
   def setup() {
     workScheduleService.create(new WorkScheduleRequests.CreateRequest(
-      id: WorkScheduleId.from("global-2018-08-14"),
+      id: id,
       date: LocalDate.parse("2018-08-14"),
-      categoryId: WorkScheduleCategoryId.from("global"),
+      categoryId: categoryId,
       holiday: false,
       times: new LinkedList<WorkScheduleTimeData>()
     ))
     workScheduleService.create(new WorkScheduleRequests.CreateRequest(
       id: WorkScheduleId.from("global-2018-08-15"),
       date: LocalDate.parse("2018-08-15"),
-      categoryId: WorkScheduleCategoryId.from("global"),
+      categoryId: categoryId,
       name: "광복절",
       holiday: true,
       times: new LinkedList<WorkScheduleTimeData>()
@@ -50,7 +57,7 @@ class WorkScheduleServiceSpec extends Specification {
     workScheduleService.create(new WorkScheduleRequests.CreateRequest(
       id: WorkScheduleId.from("global-2017-08-13"),
       date: LocalDate.parse("2017-08-13"),
-      categoryId: WorkScheduleCategoryId.from("global"),
+      categoryId: categoryId,
       holiday: false,
       times: Arrays.asList(
         new WorkScheduleTimeData(
@@ -66,7 +73,7 @@ class WorkScheduleServiceSpec extends Specification {
 
   def "아이디로 존재하는 작업일 확인"() {
     when:
-    def exists = workScheduleService.exists(WorkScheduleId.from("global-2018-08-14"))
+    def exists = workScheduleService.exists(id)
 
     then:
     exists == true
@@ -74,7 +81,7 @@ class WorkScheduleServiceSpec extends Specification {
 
   def "아이디로 존재하지 않는 작업일 확인"() {
     when:
-    def exists = workScheduleService.exists(WorkScheduleId.from("global-2018-08-16"))
+    def exists = workScheduleService.exists(unknownId)
 
     then:
     exists == false
@@ -104,12 +111,10 @@ class WorkScheduleServiceSpec extends Specification {
         end: LocalDate.parse("2018-10-31")
       )
     )
-    //def firstDay = workScheduleService.get(WorkScheduleId.from(LocalDate.now().with(TemporalAdjusters.firstDayOfMonth())))
-    //def lastDay = workScheduleService.get(WorkScheduleId.from(LocalDate.now().plusMonths(2).with(TemporalAdjusters.lastDayOfMonth())))
 
-    def firstDay = workScheduleService.get(WorkScheduleCategoryId.from("global"), LocalDate.parse("2018-08-01"))
-    def lastDay = workScheduleService.get(WorkScheduleCategoryId.from("global"), LocalDate.parse("2018-10-31"))
-    def 개천절 = workScheduleService.get(WorkScheduleCategoryId.from("global"), LocalDate.parse("2018-10-03"))
+    def firstDay = workScheduleService.get(categoryId, LocalDate.parse("2018-08-01"))
+    def lastDay = workScheduleService.get(categoryId, LocalDate.parse("2018-10-31"))
+    def 개천절 = workScheduleService.get(categoryId, LocalDate.parse("2018-10-03"))
     then:
     firstDay.date == LocalDate.parse("2018-08-01")
     lastDay.date == LocalDate.parse("2018-10-31")
@@ -120,7 +125,7 @@ class WorkScheduleServiceSpec extends Specification {
     when:
     def end = workScheduleService.calculateEnd(
       new WorkScheduleRequests.CalculateEndRequest(
-        categoryId: WorkScheduleCategoryId.from("global"),
+        categoryId: categoryId,
         begin: OffsetDateTime.parse("2018-08-11T08:00:00+09:00"),
         durationMinutes: 60 * 12
       )
@@ -134,7 +139,7 @@ class WorkScheduleServiceSpec extends Specification {
     when:
     def end = workScheduleService.calculateEnd(
       new WorkScheduleRequests.CalculateEndRequest(
-        categoryId: WorkScheduleCategoryId.from("global"),
+        categoryId: categoryId,
         begin: OffsetDateTime.parse("2018-08-11T09:00:00+09:00"),
         durationMinutes: 60 * 12 // 12 시간
       )
@@ -152,7 +157,7 @@ class WorkScheduleServiceSpec extends Specification {
     when:
     def end = workScheduleService.calculateEnd(
       new WorkScheduleRequests.CalculateEndRequest(
-        categoryId: WorkScheduleCategoryId.from("global"),
+        categoryId: categoryId,
         begin: OffsetDateTime.parse("2018-08-11T10:30:00+09:00"),
         durationMinutes: 60 * 12 // 12 시간
       )

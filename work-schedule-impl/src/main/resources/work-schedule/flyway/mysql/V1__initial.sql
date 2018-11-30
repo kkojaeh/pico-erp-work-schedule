@@ -21,7 +21,7 @@ create table wks_work_schedule_time (
 	primary key (work_schedule_id,times_order)
 ) engine=InnoDB;
 
-create index WKS_WORK_SCHEDULE_CATEGORY_ID_DATE_IDX
+create index IDX5s8tocbt08tbsak7ry54xgfkj
 	on wks_work_schedule (category_id,work_date);
 
 alter table wks_work_schedule_time
