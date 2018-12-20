@@ -31,8 +31,6 @@ public class WorkScheduleApplication implements ApplicationStarter {
 
   public static final String CONFIG_NAME = "work-schedule/application";
 
-  public static final String CONFIG_NAME_PROPERTY = "spring.config.name=work-schedule/application";
-
   public static final Properties DEFAULT_PROPERTIES = new Properties();
 
   static {
