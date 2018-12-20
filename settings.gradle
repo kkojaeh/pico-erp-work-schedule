@@ -1,5 +1,5 @@
 rootProject.name = 'pico-erp-work-schedule'
-include 'work-schedule-api'
-include 'work-schedule-impl'
-include 'work-schedule-test'
+include 'api'
+include 'impl'
+include 'test'
 

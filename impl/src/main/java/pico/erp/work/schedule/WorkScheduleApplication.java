@@ -4,16 +4,22 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
+import pico.erp.audit.AuditApi;
 import pico.erp.audit.AuditConfiguration;
+import pico.erp.shared.ApplicationId;
 import pico.erp.shared.ApplicationStarter;
 import pico.erp.shared.Public;
 import pico.erp.shared.SpringBootConfigs;
 import pico.erp.shared.data.Role;
 import pico.erp.shared.impl.ApplicationImpl;
+import pico.erp.work.schedule.WorkScheduleApi.Roles;
 import pico.erp.work.schedule.category.WorkScheduleCategory;
 import pico.erp.work.schedule.category.WorkScheduleCategory.WorkScheduleCategoryImpl;
 import pico.erp.work.schedule.category.WorkScheduleCategoryId;
@@ -49,13 +55,8 @@ public class WorkScheduleApplication implements ApplicationStarter {
   public AuditConfiguration auditConfiguration() {
     return AuditConfiguration.builder()
       .packageToScan("pico.erp.work.schedule")
-      .entity(ROLE.class)
+      .entity(Roles.class)
       .build();
-  }
-
-  @Override
-  public int getOrder() {
-    return 3;
   }
 
   @Bean
@@ -73,6 +74,18 @@ public class WorkScheduleApplication implements ApplicationStarter {
   }
 
   @Override
+  public Set<ApplicationId> getDependencies() {
+    return Stream.of(
+      AuditApi.ID
+    ).collect(Collectors.toSet());
+  }
+
+  @Override
+  public ApplicationId getId() {
+    return WorkScheduleApi.ID;
+  }
+
+  @Override
   public boolean isWeb() {
     return false;
   }
@@ -85,13 +98,13 @@ public class WorkScheduleApplication implements ApplicationStarter {
   @Bean
   @Public
   public Role workScheduleAccessorRole() {
-    return ROLE.WORK_SCHEDULE_ACCESSOR;
+    return Roles.WORK_SCHEDULE_ACCESSOR;
   }
 
   @Bean
   @Public
   public Role workScheduleManagerRole() {
-    return ROLE.WORK_SCHEDULE_MANAGER;
+    return Roles.WORK_SCHEDULE_MANAGER;
   }
 
 }
