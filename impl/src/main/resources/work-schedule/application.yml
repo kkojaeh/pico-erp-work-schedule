@@ -2,9 +2,6 @@ banner:
   location: classpath:work-schedule/banner.txt
 
 spring:
-  profiles:
-    include:
-    - test-cfg
   application:
     name: pico-work-schedule
   session:
