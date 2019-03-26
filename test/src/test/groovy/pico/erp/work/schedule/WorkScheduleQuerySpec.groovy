@@ -1,5 +1,6 @@
 package pico.erp.work.schedule
 
+import kkojaeh.spring.boot.component.SpringBootTestComponent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.ComponentScan
@@ -7,14 +8,15 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
-import pico.erp.shared.IntegrationConfiguration
+import pico.erp.shared.TestParentApplication
 import pico.erp.work.schedule.category.WorkScheduleCategoryId
 import pico.erp.work.schedule.time.WorkScheduleTimeData
 import spock.lang.Specification
 
 import java.time.LocalDate
 
-@SpringBootTest(classes = [IntegrationConfiguration])
+@SpringBootTest(classes = [WorkScheduleApplication])
+@SpringBootTestComponent(parent = TestParentApplication, siblings = [])
 @Transactional
 @Rollback
 @ActiveProfiles("test")

@@ -61,12 +61,12 @@ public class WorkScheduleRepositoryJpa implements WorkScheduleRepository {
 
   @Override
   public void deleteBy(WorkScheduleId id) {
-    repository.delete(id);
+    repository.deleteById(id);
   }
 
   @Override
   public boolean exists(WorkScheduleId id) {
-    return repository.exists(id);
+    return repository.existsById(id);
   }
 
   @Override
@@ -90,7 +90,7 @@ public class WorkScheduleRepositoryJpa implements WorkScheduleRepository {
 
   @Override
   public Optional<WorkSchedule> findBy(WorkScheduleId id) {
-    return Optional.ofNullable(repository.findOne(id))
+    return repository.findById(id)
       .map(mapper::domain);
   }
 
@@ -102,7 +102,7 @@ public class WorkScheduleRepositoryJpa implements WorkScheduleRepository {
 
   @Override
   public void update(WorkSchedule workSchedule) {
-    val entity = repository.findOne(workSchedule.getId());
+    val entity = repository.findById(workSchedule.getId()).get();
     mapper.pass(mapper.entity(workSchedule), entity);
     repository.save(entity);
   }

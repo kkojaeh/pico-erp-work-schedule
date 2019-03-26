@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import kkojaeh.spring.boot.component.Give;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import pico.erp.shared.ExtendedLabeledValue;
-import pico.erp.shared.Public;
 import pico.erp.shared.data.LabeledValuable;
 import pico.erp.shared.jpa.QueryDslJpaSupport;
 import pico.erp.work.schedule.category.WorkScheduleCategoryRepository;
@@ -23,7 +23,7 @@ import pico.erp.work.schedule.time.WorkScheduleTimeData;
 import pico.erp.work.schedule.time.WorkScheduleTimeEmbeddable;
 
 @Service
-@Public
+@Give
 @Transactional(readOnly = true)
 @Validated
 public class WorkScheduleQueryJpa implements WorkScheduleQuery {

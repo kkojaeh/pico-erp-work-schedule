@@ -3,9 +3,9 @@ package pico.erp.config;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Arrays;
+import kkojaeh.spring.boot.component.Give;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pico.erp.shared.Public;
 import pico.erp.work.schedule.category.WorkScheduleCategory;
 import pico.erp.work.schedule.category.WorkScheduleCategory.WorkScheduleCategoryImpl;
 import pico.erp.work.schedule.category.WorkScheduleCategoryId;
@@ -15,7 +15,7 @@ import pico.erp.work.schedule.time.WorkScheduleTimeData;
 public class WorkScheduleConfiguration {
 
   @Bean
-  @Public
+  @Give
   public WorkScheduleCategory printingWorkDayCategory() {
     return new WorkScheduleCategoryImpl(
       WorkScheduleCategoryId.from("printing"),

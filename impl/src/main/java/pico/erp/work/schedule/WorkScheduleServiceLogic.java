@@ -7,14 +7,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import kkojaeh.spring.boot.component.Give;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import pico.erp.audit.AuditService;
-import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
 import pico.erp.work.schedule.WorkScheduleRequests.CalculateEndRequest;
 import pico.erp.work.schedule.category.WorkScheduleCategory;
@@ -25,7 +23,7 @@ import pico.erp.work.schedule.provider.WorkScheduleProvider.WorkScheduleInfo;
 
 @SuppressWarnings("Duplicates")
 @Service
-@Public
+@Give
 @Transactional
 @Validated
 public class WorkScheduleServiceLogic implements WorkScheduleService {
@@ -38,10 +36,6 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
 
   @Autowired
   private WorkScheduleMapper mapper;
-
-  @Lazy
-  @Autowired
-  private AuditService auditService;
 
   @Autowired
   private WorkScheduleProvider workScheduleProvider;
@@ -63,7 +57,6 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
       throw new WorkScheduleExceptions.AlreadyExistsException();
     }
     val created = workScheduleRepository.create(workSchedule);
-    auditService.commit(created);
     eventPublisher.publishEvents(response.getEvents());
     return mapper.map(created);
   }
@@ -74,7 +67,6 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
       .orElseThrow(WorkScheduleExceptions.NotFoundException::new);
     val response = workSchedule.apply(mapper.map(request));
     workScheduleRepository.deleteBy(workSchedule.getId());
-    auditService.delete(workSchedule);
     eventPublisher.publishEvents(response.getEvents());
   }
 
@@ -113,7 +105,6 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
       .orElseThrow(WorkScheduleExceptions.NotFoundException::new);
     val response = workSchedule.apply(mapper.map(request));
     workScheduleRepository.update(workSchedule);
-    auditService.commit(workSchedule);
     eventPublisher.publishEvents(response.getEvents());
   }
 
@@ -145,7 +136,6 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
             val workSchedule = new WorkSchedule();
             val response = workSchedule.apply(mapper.map(info));
             val created = workScheduleRepository.create(workSchedule);
-            auditService.commit(created);
             eventPublisher.publishEvents(response.getEvents());
           });
         eventPublisher.publishEvent(

@@ -16,7 +16,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
-import pico.erp.audit.annotation.Audit;
 import pico.erp.work.schedule.category.WorkScheduleCategory;
 import pico.erp.work.schedule.time.WorkScheduleTime;
 
@@ -25,7 +24,6 @@ import pico.erp.work.schedule.time.WorkScheduleTime;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(of = "id")
-@Audit(alias = "work-schedule")
 public class WorkSchedule implements Serializable {
 
   private static final long serialVersionUID = 1L;

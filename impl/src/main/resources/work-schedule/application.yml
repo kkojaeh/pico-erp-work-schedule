@@ -1,13 +1,11 @@
-banner:
-  location: classpath:work-schedule/banner.txt
-
 spring:
+  banner:
+    location: classpath:work-schedule/banner.txt
   application:
     name: pico-work-schedule
   session:
     store-type: NONE
   messages:
-    cache-seconds: 60
     basename: work-schedule-messages
     encoding: UTF-8
   datasource:
@@ -17,6 +15,8 @@ spring:
     password: ${WORK_SCHEDULE_DATASOURCE_PASSWORD:${DATASOURCE_PASSWORD:null}}
     hikari:
       maximum-pool-size: 4
+  flyway:
+    enabled: false
   jpa:
     database: HSQL
     hibernate:
@@ -82,9 +82,6 @@ logging:
   level:
     org:
       springframework: INFO
-
-flyway:
-  enabled: false
 
 work-schedule:
   holidays:
