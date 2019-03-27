@@ -9,6 +9,7 @@ spring:
     basename: work-schedule-messages
     encoding: UTF-8
   datasource:
+    name: work-schedule-datasource
     url: ${WORK_SCHEDULE_DATASOURCE_URL:${DATASOURCE_URL:jdbc:p6spy:hsqldb:mem:work-schedule}}
     driver-class-name: ${WORK_SCHEDULE_DATASOURCE_DRIVER_CLASS_NAME:${DATASOURCE_DRIVER_CLASS_NAME:com.p6spy.engine.spy.P6SpyDriver}}
     username: ${WORK_SCHEDULE_DATASOURCE_USERNAME:${DATASOURCE_USERNAME:as}}
