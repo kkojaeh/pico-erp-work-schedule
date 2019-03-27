@@ -1,4 +1,6 @@
 spring:
+  jmx:
+    default-domain: work-schedule
   banner:
     location: classpath:work-schedule/banner.txt
   application:
