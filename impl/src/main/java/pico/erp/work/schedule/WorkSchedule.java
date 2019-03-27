@@ -1,10 +1,9 @@
 package pico.erp.work.schedule;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -84,16 +83,15 @@ public class WorkSchedule implements Serializable {
       Arrays.asList(new WorkScheduleEvents.DeletedEvent(this.id)));
   }
 
-  public OffsetDateTime atOffset(LocalTime time) {
-    val zoneOffset = category.getZoneId().getRules().getOffset(Instant.now());
-    return date.atTime(time).atOffset(zoneOffset);
+  public LocalDateTime atOffset(LocalTime time) {
+    //val zoneOffset = category.getZoneId().getRules().getOffset(Instant.now());
+    return date.atTime(time);
   }
 
-  public boolean isScheduled(OffsetDateTime dateTime) {
-    val zoneOffset = category.getZoneId().getRules().getOffset(Instant.now());
+  public boolean isScheduled(LocalDateTime dateTime) {
     return times.stream().filter(time -> {
-      val begin = date.atTime(time.getBegin()).atOffset(zoneOffset);
-      val end = date.atTime(time.getEnd()).atOffset(zoneOffset);
+      val begin = date.atTime(time.getBegin());
+      val end = date.atTime(time.getEnd());
       if (dateTime.isBefore(begin)) {
         return false;
       }

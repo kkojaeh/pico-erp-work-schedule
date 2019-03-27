@@ -1,7 +1,7 @@
 package pico.erp.work.schedule;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Comparator;
@@ -76,7 +76,7 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
   }
 
   public static void main(String... args) {
-    System.out.println(OffsetDateTime.now());
+    System.out.println(LocalDateTime.now());
   }
 
   @Override
@@ -146,7 +146,7 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
   }
 
   @Override
-  public OffsetDateTime calculateEnd(CalculateEndRequest request) {
+  public LocalDateTime calculateEnd(CalculateEndRequest request) {
     val category = get(request.getCategoryId());
     val begin = request.getBegin();
     val workSchedule = workScheduleRepository
@@ -161,7 +161,7 @@ public class WorkScheduleServiceLogic implements WorkScheduleService {
       .collect(Collectors.toList());
 
     long remainedMinutes = request.getDurationMinutes();
-    OffsetDateTime calculated = null;
+    LocalDateTime calculated = null;
 
     for (val schedule : schedules) {
       for (val time : schedule.getTimes()) {
