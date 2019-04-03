@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
+import pico.erp.shared.ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier
 import pico.erp.shared.TestParentApplication
 import pico.erp.work.schedule.category.WorkScheduleCategoryId
 import pico.erp.work.schedule.time.WorkScheduleTimeData
@@ -16,7 +17,7 @@ import spock.lang.Specification
 import java.time.LocalDate
 
 @SpringBootTest(classes = [WorkScheduleApplication])
-@SpringBootTestComponent(parent = TestParentApplication, siblings = [])
+@SpringBootTestComponent(parent = TestParentApplication, siblingsSupplier = ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier.class)
 @Transactional
 @Rollback
 @ActiveProfiles("test")

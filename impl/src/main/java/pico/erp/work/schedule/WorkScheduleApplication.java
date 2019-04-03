@@ -3,7 +3,7 @@ package pico.erp.work.schedule;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Arrays;
-import kkojaeh.spring.boot.component.Give;
+import kkojaeh.spring.boot.component.ComponentBean;
 import kkojaeh.spring.boot.component.SpringBootComponent;
 import kkojaeh.spring.boot.component.SpringBootComponentBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import pico.erp.ComponentDefinition;
 import pico.erp.shared.SharedConfiguration;
 import pico.erp.shared.data.Role;
 import pico.erp.work.schedule.WorkScheduleApi.Roles;
@@ -35,7 +36,7 @@ import pico.erp.work.schedule.time.WorkScheduleTimeData;
 @Import(value = {
   SharedConfiguration.class
 })
-public class WorkScheduleApplication {
+public class WorkScheduleApplication implements ComponentDefinition {
 
   public static void main(String[] args) {
     new SpringBootComponentBuilder()
@@ -43,8 +44,13 @@ public class WorkScheduleApplication {
       .run(args);
   }
 
+  @Override
+  public Class<?> getComponentClass() {
+    return WorkScheduleApplication.class;
+  }
+
   @Bean
-  @Give
+  @ComponentBean(host = false)
   public WorkScheduleCategory globalWorkDayCategory() {
     return new WorkScheduleCategoryImpl(
       WorkScheduleCategoryId.from("global"),
@@ -59,13 +65,13 @@ public class WorkScheduleApplication {
 
 
   @Bean
-  @Give
+  @ComponentBean(host = false)
   public Role workScheduleAccessorRole() {
     return Roles.WORK_SCHEDULE_ACCESSOR;
   }
 
   @Bean
-  @Give
+  @ComponentBean(host = false)
   public Role workScheduleManagerRole() {
     return Roles.WORK_SCHEDULE_MANAGER;
   }

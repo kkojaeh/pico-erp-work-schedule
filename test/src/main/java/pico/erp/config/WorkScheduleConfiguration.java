@@ -3,7 +3,7 @@ package pico.erp.config;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Arrays;
-import kkojaeh.spring.boot.component.Give;
+import kkojaeh.spring.boot.component.ComponentBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pico.erp.work.schedule.category.WorkScheduleCategory;
@@ -15,7 +15,7 @@ import pico.erp.work.schedule.time.WorkScheduleTimeData;
 public class WorkScheduleConfiguration {
 
   @Bean
-  @Give
+  @ComponentBean(host = false)
   public WorkScheduleCategory printingWorkDayCategory() {
     return new WorkScheduleCategoryImpl(
       WorkScheduleCategoryId.from("printing"),
