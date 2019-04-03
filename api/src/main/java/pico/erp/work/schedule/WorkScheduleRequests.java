@@ -1,7 +1,7 @@
 package pico.erp.work.schedule;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -97,7 +97,7 @@ public interface WorkScheduleRequests {
     WorkScheduleCategoryId categoryId;
 
     @NotNull
-    OffsetDateTime begin;
+    LocalDateTime begin;
 
     @Min(0)
     long durationMinutes;

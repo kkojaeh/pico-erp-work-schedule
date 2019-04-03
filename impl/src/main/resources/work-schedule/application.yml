@@ -1,22 +1,25 @@
-banner:
-  location: classpath:work-schedule/banner.txt
-
 spring:
+  jmx:
+    default-domain: work-schedule
+  banner:
+    location: classpath:work-schedule/banner.txt
   application:
     name: pico-work-schedule
   session:
     store-type: NONE
   messages:
-    cache-seconds: 60
     basename: work-schedule-messages
     encoding: UTF-8
   datasource:
+    name: work-schedule-datasource
     url: ${WORK_SCHEDULE_DATASOURCE_URL:${DATASOURCE_URL:jdbc:p6spy:hsqldb:mem:work-schedule}}
     driver-class-name: ${WORK_SCHEDULE_DATASOURCE_DRIVER_CLASS_NAME:${DATASOURCE_DRIVER_CLASS_NAME:com.p6spy.engine.spy.P6SpyDriver}}
     username: ${WORK_SCHEDULE_DATASOURCE_USERNAME:${DATASOURCE_USERNAME:as}}
     password: ${WORK_SCHEDULE_DATASOURCE_PASSWORD:${DATASOURCE_PASSWORD:null}}
     hikari:
       maximum-pool-size: 4
+  flyway:
+    enabled: false
   jpa:
     database: HSQL
     hibernate:
@@ -82,9 +85,6 @@ logging:
   level:
     org:
       springframework: INFO
-
-flyway:
-  enabled: false
 
 work-schedule:
   holidays:

@@ -1,5 +1,6 @@
 package pico.erp.work.schedule
 
+import kkojaeh.spring.boot.component.SpringBootTestComponent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.ComponentScan
@@ -7,16 +8,18 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
-import pico.erp.shared.IntegrationConfiguration
+import pico.erp.shared.ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier
+import pico.erp.shared.TestParentApplication
 import pico.erp.work.schedule.category.WorkScheduleCategoryId
 import pico.erp.work.schedule.time.WorkScheduleTimeData
 import spock.lang.Specification
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
-import java.time.OffsetDateTime
 
-@SpringBootTest(classes = [IntegrationConfiguration])
+@SpringBootTest(classes = [WorkScheduleApplication])
+@SpringBootTestComponent(parent = TestParentApplication, siblingsSupplier = ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier.class)
 @Transactional
 @Rollback
 @ActiveProfiles("test")
@@ -126,7 +129,7 @@ class WorkScheduleServiceSpec extends Specification {
     def end = workScheduleService.calculateEnd(
       new WorkScheduleRequests.CalculateEndRequest(
         categoryId: categoryId,
-        begin: OffsetDateTime.parse("2018-08-11T08:00:00+09:00"),
+        begin: LocalDateTime.parse("2018-08-11T08:00:00"),
         durationMinutes: 60 * 12
       )
     )
@@ -140,7 +143,7 @@ class WorkScheduleServiceSpec extends Specification {
     def end = workScheduleService.calculateEnd(
       new WorkScheduleRequests.CalculateEndRequest(
         categoryId: categoryId,
-        begin: OffsetDateTime.parse("2018-08-11T09:00:00+09:00"),
+        begin: LocalDateTime.parse("2018-08-11T09:00:00"),
         durationMinutes: 60 * 12 // 12 시간
       )
     )
@@ -150,7 +153,7 @@ class WorkScheduleServiceSpec extends Specification {
     // 2018-08-12T13:00 ~ 2018-08-12T14:00 1시간
 
     then:
-    end == OffsetDateTime.parse("2018-08-12T14:00:00+09:00")
+    end == LocalDateTime.parse("2018-08-12T14:00:00")
   }
 
   def "작업 종료시간 계산시 시작 시간이 정시가 아닐 수 있다"() {
@@ -158,7 +161,7 @@ class WorkScheduleServiceSpec extends Specification {
     def end = workScheduleService.calculateEnd(
       new WorkScheduleRequests.CalculateEndRequest(
         categoryId: categoryId,
-        begin: OffsetDateTime.parse("2018-08-11T10:30:00+09:00"),
+        begin: LocalDateTime.parse("2018-08-11T10:30:00"),
         durationMinutes: 60 * 12 // 12 시간
       )
     )
@@ -168,7 +171,7 @@ class WorkScheduleServiceSpec extends Specification {
     // 2018-08-12T13:00 ~ 2018-08-12T15:30 2.5시간
 
     then:
-    end == OffsetDateTime.parse("2018-08-12T15:30:00+09:00")
+    end == LocalDateTime.parse("2018-08-12T15:30:00")
   }
 
 }
