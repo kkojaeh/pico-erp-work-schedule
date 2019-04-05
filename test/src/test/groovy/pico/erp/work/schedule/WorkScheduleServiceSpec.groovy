@@ -15,8 +15,8 @@ import pico.erp.work.schedule.time.WorkScheduleTimeData
 import spock.lang.Specification
 
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.OffsetDateTime
 
 @SpringBootTest(classes = [WorkScheduleApplication])
 @SpringBootTestComponent(parent = TestParentApplication, siblingsSupplier = ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier.class)
@@ -129,7 +129,7 @@ class WorkScheduleServiceSpec extends Specification {
     def end = workScheduleService.calculateEnd(
       new WorkScheduleRequests.CalculateEndRequest(
         categoryId: categoryId,
-        begin: LocalDateTime.parse("2018-08-11T08:00:00"),
+        begin: OffsetDateTime.parse("2018-08-11T08:00:00+09:00"),
         durationMinutes: 60 * 12
       )
     )
@@ -143,7 +143,7 @@ class WorkScheduleServiceSpec extends Specification {
     def end = workScheduleService.calculateEnd(
       new WorkScheduleRequests.CalculateEndRequest(
         categoryId: categoryId,
-        begin: LocalDateTime.parse("2018-08-11T09:00:00"),
+        begin: OffsetDateTime.parse("2018-08-11T09:00:00+09:00"),
         durationMinutes: 60 * 12 // 12 시간
       )
     )
@@ -153,7 +153,7 @@ class WorkScheduleServiceSpec extends Specification {
     // 2018-08-12T13:00 ~ 2018-08-12T14:00 1시간
 
     then:
-    end == LocalDateTime.parse("2018-08-12T14:00:00")
+    end == OffsetDateTime.parse("2018-08-12T14:00:00+09:00")
   }
 
   def "작업 종료시간 계산시 시작 시간이 정시가 아닐 수 있다"() {
@@ -161,7 +161,7 @@ class WorkScheduleServiceSpec extends Specification {
     def end = workScheduleService.calculateEnd(
       new WorkScheduleRequests.CalculateEndRequest(
         categoryId: categoryId,
-        begin: LocalDateTime.parse("2018-08-11T10:30:00"),
+        begin: OffsetDateTime.parse("2018-08-11T10:30:00+09:00"),
         durationMinutes: 60 * 12 // 12 시간
       )
     )
@@ -171,7 +171,7 @@ class WorkScheduleServiceSpec extends Specification {
     // 2018-08-12T13:00 ~ 2018-08-12T15:30 2.5시간
 
     then:
-    end == LocalDateTime.parse("2018-08-12T15:30:00")
+    end == OffsetDateTime.parse("2018-08-12T15:30:00+09:00")
   }
 
 }
